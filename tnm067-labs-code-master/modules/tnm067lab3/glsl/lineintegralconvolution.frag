@@ -26,13 +26,13 @@ void traverse(vec2 posF , float stepSize,int steps , inout  float v , inout int 
 }
 
 void main(void) {
-    float v = texture(noiseColor,texCoord_.xy).r;
-    int c = 1;
+	float v = texture(noiseColor,texCoord_.xy).r;
+	int c = 1;
     
     //traverse the vector field both forward and backwards to calculate the output color
 	traverse(texCoord_.xy, stepSize, steps, v, c);
 	traverse(texCoord_.xy, -stepSize, steps, v, c);
 	v /= c;
 
-    FragData0 = vec4(v,v,v,1);
+	FragData0 = vec4(v,v,v,1);
 }

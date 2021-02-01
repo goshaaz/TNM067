@@ -9,10 +9,10 @@ float passThrough(vec2 coord){
 }
 
 float magnitude( vec2 coord ){
-    float Vx = texture(vfColor,coord).x;
+	float Vx = texture(vfColor,coord).x;
 	float Vy = texture(vfColor,coord).y;
 	float mag = sqrt(Vx * Vx + Vy * Vy);
-    return mag;
+	return mag;
 }
 
 float divergence(vec2 coord){
@@ -39,7 +39,7 @@ float rotation(vec2 coord){
 	vec2 dV_y = (dytermleft - dytermright) / (2 * pixelSize.y);
 
 	float rot = dV_x.y - dV_y.x;
-    return rot;
+	return rot;
 }
 
 void main(void) {
