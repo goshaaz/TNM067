@@ -1,0 +1,54 @@
+layout(points) in;
+layout(triangle_strip, max_vertices = 96) out;
+
+uniform float radius;
+
+in mat2 vJ[1];
+
+out vec3 color;
+
+const float pi = 3.14159265359;
+const float twoPi = 6.28318530718;
+
+void main(void) {
+    vec2 center = gl_in[0].gl_Position.xy;
+
+    mat2 J = vJ[0];
+	mat2 Jt = J;
+	
+	Jt[0][1] = J[1][0];
+    Jt[1][0] = J[0][1];
+    mat2 Jsym = (J + Jt) / 2;
+
+    for (int i = 0; i < 32; i++) {
+		if(28 <= i || i < 4) { // Mellan 28 och 4
+            color = vec3(0.851, 0.373, 0.008);
+        }
+        else if (4 <= i && i < 12) { // Mellan 4 och 12
+            color = vec3(0.106, 0.620, 0.467);
+        }
+        else if (12 <= i && i < 20) { // Mellan 12 och 20
+            color = vec3(0.906, 0.061, 0.541);
+        }
+        else { // Mellan 20 och 28
+            color = vec3(0.459, 0.439, 0.702);
+        }
+        float a1 = twoPi * (i / 32.0);        // angle from y-axis of second point in the triangle
+        float a2 = twoPi * ((i + 1) / 32.0);  // angle from y-axis of third point in the triangle
+
+        gl_Position = vec4(center, 0, 1);  // first point in triangle is in the origin of the circle
+        EmitVertex();
+
+        vec2 o1 = vec2(sin(a1), cos(a1));  // calculate an offset vector for the second point in the triangle based on a1
+
+        gl_Position = vec4(center + Jsym * o1 * radius, 0, 1);
+        EmitVertex();
+
+        vec2 o2 = vec2(sin(a2), cos(a2));  // calculate an offset vector for the second point in the triangle based on a2
+
+        gl_Position = vec4(center + Jsym * o2 * radius, 0, 1);
+        EmitVertex();
+
+        EndPrimitive();
+    }
+}
