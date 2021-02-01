@@ -29,7 +29,7 @@ float divergence(vec2 coord){
 }
 
 float rotation(vec2 coord){
-    vec2 pixelSize = vfParameters.reciprocalDimensions;
+	vec2 pixelSize = vfParameters.reciprocalDimensions;
 	vec2 dxtermleft = texture2D(vfColor, vec2(coord.x + pixelSize.x, coord.y)).xy;
 	vec2 dxtermright = texture2D(vfColor, vec2(coord.x - pixelSize.x, coord.y)).xy;
 	vec2 dytermleft = texture2D(vfColor, vec2(coord.x, coord.y + pixelSize.y)).xy;
