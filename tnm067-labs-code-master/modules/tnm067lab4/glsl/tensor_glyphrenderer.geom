@@ -12,10 +12,8 @@ const float twoPi = 6.28318530718;
 
 void main(void) {
     vec2 center = gl_in[0].gl_Position.xy;
-
     mat2 J = vJ[0];
 	mat2 Jt = J;
-	
 	Jt[0][1] = J[1][0];
     Jt[1][0] = J[0][1];
     mat2 Jsym = (J + Jt) / 2;
