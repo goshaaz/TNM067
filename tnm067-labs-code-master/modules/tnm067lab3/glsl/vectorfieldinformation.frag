@@ -16,7 +16,7 @@ float magnitude( vec2 coord ){
 }
 
 float divergence(vec2 coord){
-    vec2 pixelSize = vfParameters.reciprocalDimensions;
+	vec2 pixelSize = vfParameters.reciprocalDimensions;
 	vec2 dxtermleft = texture2D(vfColor, vec2(coord.x + pixelSize.x, coord.y)).xy;
 	vec2 dxtermright = texture2D(vfColor, vec2(coord.x - pixelSize.x, coord.y)).xy;
 	vec2 dytermleft = texture2D(vfColor, vec2(coord.x, coord.y + pixelSize.y)).xy;
@@ -25,7 +25,7 @@ float divergence(vec2 coord){
 	vec2 dV_y = (dytermleft - dytermright) / (2 * pixelSize.y);
 
 	float div = dV_x.x + dV_y.y;
-    return div;
+	return div;
 }
 
 float rotation(vec2 coord){
@@ -38,8 +38,8 @@ float rotation(vec2 coord){
 	vec2 dV_x = (dxtermleft - dxtermright) / (2 * pixelSize.x);
 	vec2 dV_y = (dytermleft - dytermright) / (2 * pixelSize.y);
 
-	float div = dV_x.y - dV_y.x;
-    return 0.0;
+	float rot = dV_x.y - dV_y.x;
+    return rot;
 }
 
 void main(void) {
